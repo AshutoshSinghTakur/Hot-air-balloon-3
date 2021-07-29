@@ -18,9 +18,9 @@ function setup() {
 
   createCanvas(1500,700);
 
-  balloon=createSprite(100,250,150,150);
+  balloon=createSprite(200,520,150,150);
   balloon.addAnimation("hotAirBalloon",balloonImage1);
-  balloon.scale=0.5;
+  balloon.scale=0.7;
 
   textSize(20); 
 }
@@ -43,11 +43,13 @@ function draw() {
     balloon.addAnimation("hotAirBalloon",balloonImage2);
     //write code to move air balloon in up direction
     updatePosition(0,-10);
+    balloon.scale = balloon.scale -0.01
   }
   else if(keyDown(DOWN_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage2);
     //write code to move air balloon in down direction
     updatePosition(0,+10)
+    balloon.scale = balloon.scale +0.01
   }
 
   drawSprites();
@@ -64,13 +66,13 @@ function readPosition(data){
 }
 
 function showError(){
-  console.log("fly");
+  console.log("Error in writing to the database");
 }
 
 function updatePosition(x,y){
   database.ref("balloon/position").set({
-    x: balloon.x + x,
-    y: balloon.y + y
+    'x': balloon.x + x,
+    'y': balloon.y + y
   })
     
   }
